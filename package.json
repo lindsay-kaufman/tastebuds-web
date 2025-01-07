@@ -1,0 +1,5 @@
+{
+	"devDependencies": {
+		"@vis.gl/react-google-maps": "^1.4.3"
+	}
+}
