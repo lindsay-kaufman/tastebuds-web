@@ -77,7 +77,6 @@ export const AutocompleteCustom = ({onPlaceSelect}: Props) => {
                 placeDetails: google.maps.places.PlaceResult | null
             ) => {
                 onPlaceSelect(placeDetails);
-                console.log('place details: ', placeDetails);
                 setPredictionResults([]);
                 setInputValue(placeDetails?.formatted_address ?? '');
                 setSessionToken(new places.AutocompleteSessionToken());

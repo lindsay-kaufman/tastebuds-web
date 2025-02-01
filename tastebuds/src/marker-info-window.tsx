@@ -38,7 +38,8 @@ export const MarkerWithInfoWindow = ({place, onPlaceSelect}: MarkerInfoProps) =>
                         onPlaceSelect(null)
                     }}
                 >
-                <div>{place.name}</div>
+                    <div>{place.name}</div>
+                    <button onClick={() => console.log(place.place_id)}>Add to places</button>
                 </InfoWindow>
             )}
         </>
