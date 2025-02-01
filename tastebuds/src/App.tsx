@@ -30,8 +30,6 @@ function App() {
     const loadPlaces = async () => {
         await getPlacesByUser().then(places => {
              setUserPlaces(places);
-            console.log(places);
-            console.log('userPlaces', userPlaces);
         }).catch(error => console.error(error));
     }
     useEffect(() => {
@@ -51,8 +49,7 @@ function App() {
                     defaultZoom={15}
                     gestureHandling={'greedy'}
                     disableDefaultUI={true}
-                    // mapId={import.meta.env.GOOGLE_MAPS_MAP_ID}
-                    mapId="3bc9b9cc9c484b9d"
+                    mapId={import.meta.env.GOOGLE_MAPS_MAP_ID}
                 />
 
                 <CustomMapControl
