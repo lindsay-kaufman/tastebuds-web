@@ -9,7 +9,6 @@ import {getPlacesByUser} from "./api/places.ts";
 
 
 //TODO:
-// * Update database and queries using list schema
 // * Get user location
 // * Set places on load within bounds of user location
 // * Save new place from info window
@@ -23,7 +22,7 @@ interface Place {
     lng: number;
 }
 
-function App() {
+export const App = () => {
     const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
     const [userPlaces, setUserPlaces] = useState<Place[]>([]);
 
@@ -37,8 +36,7 @@ function App() {
     }, [])
 
     return (
-        <div>
-            <APIProvider apiKey={import.meta.env.GOOGLE_MAPS_API_KEY}>
+            <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
                     <div className="sidebar">
                             this is a sidebar
                     </div>
@@ -46,10 +44,10 @@ function App() {
                 <Map
                     style={{width: '100vw', height: '100vh', padding: '0px'}}
                     defaultCenter={{lat: 42.3601, lng: -71.0589}}
-                    defaultZoom={15}
+                    defaultZoom={12}
                     gestureHandling={'greedy'}
                     disableDefaultUI={true}
-                    mapId={import.meta.env.GOOGLE_MAPS_MAP_ID}
+                    mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID}
                 />
 
                 <CustomMapControl
@@ -73,10 +71,7 @@ function App() {
                         />
                     )
                 )}
-
             </APIProvider>
-        </div>
-
     )
 }
 

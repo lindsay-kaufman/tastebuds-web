@@ -3,11 +3,3 @@
   text-align: center;
 }
 
-.overlay {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  background: #e6e6e6;
-  width: 20vw;
-  height: 100%;
-}
