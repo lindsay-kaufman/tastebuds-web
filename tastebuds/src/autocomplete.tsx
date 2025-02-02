@@ -93,7 +93,6 @@ export const AutocompleteCustom = ({onPlaceSelect}: Props) => {
                 value={inputValue}
                 onInput={(event: FormEvent<HTMLInputElement>) => onInputChange(event)}
                 placeholder="Search for a place"
-                style={{ width: '25vw' }}
             />
 
             {predictionResults.length > 0 && (

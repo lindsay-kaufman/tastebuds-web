@@ -1,19 +1,33 @@
 import "./sidebar.css"
-import {CustomMapControl} from "./map-control.tsx";
-import {ControlPosition} from "@vis.gl/react-google-maps";
-import MapHandler from "./map-handler.tsx";
+import { useState} from "react";
+import classNames from 'classnames';
+import doubleArrow from './assets/double-arrow-icon.png'
 
-interface SidebarProps {
-    setSelectedPlace: (place: google.maps.places.PlaceResult | null) => void;
-    selectedPlace: google.maps.places.PlaceResult | null;
+export const Sidebar = () => {
+    const [isExpanded, setExpanded] = useState(false);
+
+
+    const sidebarWrapperClasses = classNames(
+        "sidebar",
+        {
+            "sidebar-expanded": isExpanded,
+        }
+    )
+
+    return (
+        <div className={sidebarWrapperClasses}>
+            <div className="sidebar-expander" onClick={() => setExpanded(!isExpanded)}>
+                <img src={doubleArrow} alt="sidebar arrow"/>
+            </div>
+            <h2>Recent Locations</h2>
+            <ul>
+                <li>📍 Boston, MA</li>
+                <li>📍 New York, NY</li>
+                <li>📍 San Francisco, CA</li>
+                <li>📍 Denver, CO</li>
+                <li>📍 Austin, TX</li>
+            </ul>
+            <button className="action-button">Show More</button>
+        </div>
+    )
 }
-
-export const Sidebar = ({setSelectedPlace, selectedPlace}: SidebarProps) => (
-    <div className="sidebar">
-        <CustomMapControl
-            controlPosition={ControlPosition.TOP_LEFT}
-            onPlaceSelect={setSelectedPlace}
-        />
-        <MapHandler place={selectedPlace}/>
-    </div>
-)

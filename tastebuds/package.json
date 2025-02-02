@@ -22,6 +22,7 @@
     "@types/react-dom": "^18.3.5",
     "@vis.gl/react-google-maps": "^1.5.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "classnames": "^2.5.1",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.0.0",

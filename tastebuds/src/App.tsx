@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {CustomMapControl} from "./map-control.tsx";
 import {MarkerWithInfoWindow} from './marker-info-window.tsx';
 import {getPlacesByUser} from "./api/places.ts";
-
+import {Sidebar} from "./sidebar.tsx";
 
 
 //TODO:
@@ -28,7 +28,7 @@ export const App = () => {
 
     const loadPlaces = async () => {
         await getPlacesByUser().then(places => {
-             setUserPlaces(places);
+            setUserPlaces(places);
         }).catch(error => console.error(error));
     }
     useEffect(() => {
@@ -36,42 +36,38 @@ export const App = () => {
     }, [])
 
     return (
-            <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
-                    <div className="sidebar">
-                            this is a sidebar
-                    </div>
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
+        <Map
+            style={{width: '100vw', height: '100vh', padding: '0px'}}
+            defaultCenter={{lat: 42.3601, lng: -71.0589}}
+            defaultZoom={12}
+            gestureHandling={'greedy'}
+            disableDefaultUI={true}
+            mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID}
+        />
+        <CustomMapControl
+            controlPosition={ControlPosition.TOP}
+            onPlaceSelect={setSelectedPlace}
+        />
+        <MapHandler place={selectedPlace}/>
 
-                <Map
-                    style={{width: '100vw', height: '100vh', padding: '0px'}}
-                    defaultCenter={{lat: 42.3601, lng: -71.0589}}
-                    defaultZoom={12}
-                    gestureHandling={'greedy'}
-                    disableDefaultUI={true}
-                    mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID}
+        {selectedPlace && (
+            <MarkerWithInfoWindow
+                place={selectedPlace}
+                onPlaceSelect={setSelectedPlace}
+            />
+        )}
+
+        {userPlaces.length > 0 && userPlaces.map(place => (
+                <AdvancedMarker
+                    key={place.place_id}
+                    title={place.name}
+                    position={{lat: place.lat, lng: place.lng}}
                 />
-
-                <CustomMapControl
-                    controlPosition={ControlPosition.TOP}
-                    onPlaceSelect={setSelectedPlace}
-                />
-                <MapHandler place={selectedPlace}/>
-
-                {selectedPlace && (
-                    <MarkerWithInfoWindow
-                        place={selectedPlace}
-                        onPlaceSelect={setSelectedPlace}
-                    />
-                )}
-
-                {userPlaces.length > 0 && userPlaces.map(place => (
-                        <AdvancedMarker
-                            key={place.place_id}
-                            title={place.name}
-                            position={{lat: place.lat, lng: place.lng}}
-                        />
-                    )
-                )}
-            </APIProvider>
+            )
+        )}
+        <Sidebar />
+    </APIProvider>
     )
 }
 
