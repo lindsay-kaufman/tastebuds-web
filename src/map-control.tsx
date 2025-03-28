@@ -4,7 +4,6 @@ import {AutocompleteCustom} from './autocomplete';
 
 type CustomAutocompleteControlProps = {
     controlPosition: ControlPosition;
-
     onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
 };
 
@@ -17,7 +16,6 @@ export const CustomMapControl = ({
         <MapControl position={controlPosition}>
             <div className="autocomplete-control">
                 <AutocompleteCustom onPlaceSelect={onPlaceSelect}/>
-
             </div>
         </MapControl>
     );
